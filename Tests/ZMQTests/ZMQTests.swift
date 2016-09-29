@@ -32,7 +32,7 @@ class ZMQTests: XCTestCase {
         XCTAssertTrue(major >= 4, "Major version is 4 or more")
         XCTAssertTrue(minor >= 0, "minor is greater than or equal to zero")
         XCTAssertTrue(patch >= 0, "patch is greater than or equal to zero")
-        print("Found ZMQ version is \(major).\(minor).\(patch)")
+        print("ZeroMQ library version is \(major).\(minor).\(patch)")
     }
 
     func testHas() {

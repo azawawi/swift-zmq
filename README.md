@@ -8,7 +8,7 @@ ZeroMQ Swift bindings
 import ZMQ
 
 let (major, minor, patch) = ZMQ.version
-print("Found ZMQ version is \(major).\(minor).\(patch)")
+print("ZeroMQ library version is \(major).\(minor).\(patch)")
 ```
 
 ## Usage
