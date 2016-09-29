@@ -33,7 +33,7 @@ import CZeroMQ
 //}
 
 // Sources/ZMQ.swift
-class ZMQ {
+struct ZMQ {
 
     /*
         ipc - the library supports the ipc:// protocol
