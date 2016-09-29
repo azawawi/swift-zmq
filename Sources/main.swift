@@ -5,9 +5,6 @@
 */
 
 
-//import ZMQ
-
-print("Hello world")
 print("ipc    is supported = \(ZMQ.has(.ipc))")
 print("pgm    is supported = \(ZMQ.has(.pgm))")
 print("tipc   is supported = \(ZMQ.has(.tipc))")
