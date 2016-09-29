@@ -1,7 +1,7 @@
 # ZMQ
 
-This package provides [swift](http://swift.org) API bindings for the famous
-[ZeroMQ](http://zeromq.org).
+This package provides [Swift](http://swift.org) API bindings for the famous
+[ZeroMQ](http://zeromq.org) library.
 
 **Note: At the moment, please consider the project experimental.**
 
