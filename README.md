@@ -10,10 +10,6 @@ This package provides [swift](http://swift.org) API bindings for the famous
 > provides a message queue, but unlike message-oriented middleware, a ZeroMQ
 > system can run without a dedicated message broker. The library's API is
 > designed to resemble that of Berkeley sockets.
->
-> ZeroMQ is developed by a large community of contributors, founded by iMatix,
-> which holds the domain name and trademarks. There are third-party bindings for
-> many popular programming languages.
 
 ## Project Goals
 
