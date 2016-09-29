@@ -8,8 +8,7 @@
 //import ZMQ
 
 print("Hello world")
-//print("ipc    is supported = \(ZMQ.has(.ipc))")
-/*
+print("ipc    is supported = \(ZMQ.has(.ipc))")
 print("pgm    is supported = \(ZMQ.has(.pgm))")
 print("tipc   is supported = \(ZMQ.has(.tipc))")
 print("norm   is supported = \(ZMQ.has(.norm))")
@@ -30,4 +29,3 @@ for request_nbr in 1...5 {
   let _ = requestor.recv()
   print("Received World \(request_nbr)")
 }
-*/
