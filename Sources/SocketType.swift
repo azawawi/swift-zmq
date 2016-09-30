@@ -27,9 +27,18 @@ import CZeroMQ
 
 extension ZMQ {
 
-    public enum SocketOption : Int32 {
+    public enum SocketType : Int32 {
         case req
         case rep
     }
 
+}
+
+extension ZMQ.SocketType {
+    public var rawValue: Int32 {
+        switch self {
+            case .req: return ZMQ_REQ
+            case .rep: return ZMQ_REP
+        }
+    }
 }

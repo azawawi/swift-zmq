@@ -56,8 +56,8 @@ extension ZMQ {
             }
         }
 
-        public func socket(_ socketOption : SocketOption) throws -> Socket {
-            return try Socket(context: self, socketOption: socketOption)
+        public func socket(type : ZMQ.SocketType) throws -> Socket {
+            return try Socket(context: self, type: type)
         }
     }
 

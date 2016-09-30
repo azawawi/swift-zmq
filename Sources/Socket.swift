@@ -30,12 +30,11 @@ extension ZMQ {
     public class Socket {
         var pointer : UnsafeMutableRawPointer?
 
-        public init(context: Context, socketOption : SocketOption) throws {
-            // void *zmq_socket (void *context, int type);
-            let p :  UnsafeMutableRawPointer? = zmq_socket(context.pointer, socketOption.rawValue)
+        public init(context: Context, type : SocketType) throws {
+            // Call void *zmq_socket (void *context, int type);
+            let p :  UnsafeMutableRawPointer? = zmq_socket(context.pointer, type.rawValue)
             guard p != nil else {
-                // TODO throw error
-                return
+                throw ZMQError.invalidHandle
             }
 
             // Now we can assign socket pointer safely
@@ -46,7 +45,7 @@ extension ZMQ {
             //TODO destroy socket
         }
 
-        public func connect(_ endpoint : String) {
+        public func connect(endpoint : String) {
             //int zmq_connect (void *socket, const char *endpoint);
             //let r = zmq_connect(endpoint)
         }
@@ -55,7 +54,7 @@ extension ZMQ {
             //TODO  call int zmq_bind (void *socket, const char *endpoint);
         }
 
-        public func send(_ string : String) {
+        public func send(string : String) {
             //TODo send message
         }
 
