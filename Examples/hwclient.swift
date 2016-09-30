@@ -1,11 +1,12 @@
 
 // Hello World client in Swift
 
+import Foundation
 import ZMQ
 
 func hwclient() {
     print("Connecting to hello world server...")
-    var context   = ZMQ.Context()
+    var context   = ZMQ.context()
     var requestor = context.socket(.req)
     requestor.connect("tcp://localhost:5555")
 
