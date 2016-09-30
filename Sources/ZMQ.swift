@@ -57,4 +57,9 @@ struct ZMQ {
     static func has(_ capability : Capability) -> Bool {
         return zmq_has(capability.rawValue) == 1
     }
+
+    static func context() throws -> Context {
+        return try Context()
+    }
+
 }
