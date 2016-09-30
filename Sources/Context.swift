@@ -58,7 +58,7 @@ extension ZMQ {
 
   }
 
-  func context() throws -> Context {
+  static func context() throws -> Context {
       return try Context()
   }
 
