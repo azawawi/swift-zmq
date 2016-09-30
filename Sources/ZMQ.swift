@@ -25,14 +25,6 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-//import LibZMQ
-//if #available(iOS 9, *) {
-  //import LibZMQ4iOS
-//} else {
-  //import LibZMQ
-//}
-
-// Sources/ZMQ.swift
 struct ZMQ {
 
     /*

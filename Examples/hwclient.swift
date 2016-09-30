@@ -1,17 +1,18 @@
-//
-// Hello World server in Swift
-//
+
+// Hello World client in Swift
 
 import ZMQ
 
-// Create a socket to listen and talk to incoming clients
-var context   = ZMQ.Context()
-var responder = context.socket(.rep)
-responder.bind("tcp://*:5555")
+func hwclient() {
+    print("Connecting to hello world server...")
+    var context   = ZMQ.Context()
+    var requestor = context.socket(.req)
+    requestor.connect("tcp://localhost:5555")
 
-while true {
-    responder.recv()
-    print("Received Hello")
-    sleep(1)
-    responder.send("World")
+    for request_nbr in 0...9 {
+        print("Sending Hello \(request_nbr)...")
+        requestor.send("Hello")
+        requestor.recv()
+        print("Received World \(request_nbr)")
+    }
 }
