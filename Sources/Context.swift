@@ -25,36 +25,40 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-public class Context {
-    var pointer : UnsafeMutableRawPointer?
+extension ZMQ {
 
-    public init() throws {
-        let contextHandle = zmq_ctx_new()
-        if contextHandle == nil {
-            throw ZMQError.invalidHandle
+    public class Context {
+        var pointer : UnsafeMutableRawPointer?
+
+        public init() throws {
+            let contextHandle = zmq_ctx_new()
+            if contextHandle == nil {
+                throw ZMQError.invalidHandle
+            }
+
+            pointer = contextHandle
         }
 
-        pointer = contextHandle
-    }
-
-    deinit {
-        try! term()
-    }
-
-    public func term() throws {
-        guard pointer != nil else {
-            return
+        deinit {
+            try! term()
         }
 
-        let result = zmq_ctx_term(pointer)
-        if result == -1 {
-            throw ZMQError.invalidHandle
-        } else {
-            pointer = nil
+        public func term() throws {
+            guard pointer != nil else {
+                return
+            }
+
+            let result = zmq_ctx_term(pointer)
+            if result == -1 {
+                throw ZMQError.invalidHandle
+            } else {
+                pointer = nil
+            }
+        }
+
+        public func socket(_ socketOption : SocketOption) throws -> Socket {
+            return try Socket(context: self, socketOption: socketOption)
         }
     }
 
-    public func socket(_ socketOption : SocketOption) throws -> Socket {
-        return try Socket(context: self, socketOption: socketOption)
-    }
 }

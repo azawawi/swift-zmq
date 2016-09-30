@@ -25,7 +25,11 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-public enum SocketOption : Int32 {
-    case req
-    case rep
+extension ZMQ {
+
+    public enum SocketOption : Int32 {
+        case req
+        case rep
+    }
+
 }

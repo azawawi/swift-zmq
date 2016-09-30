@@ -25,40 +25,44 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-public class Socket {
-    var pointer : UnsafeMutableRawPointer?
+extension ZMQ {
 
-    public init(context: Context, socketOption : SocketOption) throws {
-        // void *zmq_socket (void *context, int type);
-        let p :  UnsafeMutableRawPointer? = zmq_socket(context.pointer, socketOption.rawValue)
-        guard p != nil else {
-            // TODO throw error
-            return
+    public class Socket {
+        var pointer : UnsafeMutableRawPointer?
+
+        public init(context: Context, socketOption : SocketOption) throws {
+            // void *zmq_socket (void *context, int type);
+            let p :  UnsafeMutableRawPointer? = zmq_socket(context.pointer, socketOption.rawValue)
+            guard p != nil else {
+                // TODO throw error
+                return
+            }
+
+            // Now we can assign socket pointer safely
+            pointer = p!
         }
 
-        // Now we can assign socket pointer safely
-        pointer = p!
+        deinit {
+            //TODO destroy socket
+        }
+
+        public func connect(_ endpoint : String) {
+            //int zmq_connect (void *socket, const char *endpoint);
+            //let r = zmq_connect(endpoint)
+        }
+
+        public func bind(endpoint: String) {
+            //TODO  call int zmq_bind (void *socket, const char *endpoint);
+        }
+
+        public func send(_ string : String) {
+            //TODo send message
+        }
+
+        public func recv() -> String {
+            //TODO receive message
+            return ""
+        }
     }
 
-    deinit {
-        //TODO destroy socket
-    }
-
-    public func connect(_ endpoint : String) {
-        //int zmq_connect (void *socket, const char *endpoint);
-        //let r = zmq_connect(endpoint)
-    }
-
-    public func bind(endpoint: String) {
-        //TODO  call int zmq_bind (void *socket, const char *endpoint);
-    }
-
-    public func send(_ string : String) {
-        //TODo send message
-    }
-
-    public func recv() -> String {
-        //TODO receive message
-        return ""
-    }
 }
