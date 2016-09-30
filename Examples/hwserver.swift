@@ -5,14 +5,14 @@
 import Foundation
 import ZMQ
 
-func hwserver() {
+func hwserver() throws {
     // Create a socket to listen and talk to incoming clients
-    let context   = Context()
-    let responder = context.socket(.rep)
+    let context   = try Context()
+    let responder = try context.socket(.rep)
     responder.bind("tcp://*:5555")
 
     while true {
-        responder.recv()
+        let _ = responder.recv()
         print("Received Hello")
         sleep(1)
         responder.send("World")

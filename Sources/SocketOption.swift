@@ -27,4 +27,5 @@ import CZeroMQ
 
 public enum SocketOption : Int32 {
     case req
+    case rep
 }

@@ -4,16 +4,16 @@
 import Foundation
 import ZMQ
 
-func hwclient() {
+func hwclient() throws {
     print("Connecting to hello world server...")
-    let context   = Context()
-    let requestor = context.socket(.req)
+    let context   = try Context()
+    let requestor = try context.socket(.req)
     requestor.connect("tcp://localhost:5555")
 
     for request_nbr in 0...9 {
         print("Sending Hello \(request_nbr)...")
         requestor.send("Hello")
-        requestor.recv()
+        let _ = requestor.recv()
         print("Received World \(request_nbr)")
     }
 }
