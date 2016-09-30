@@ -25,7 +25,7 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-class ZMQ {
+public struct ZMQ {
 
     /*
         ipc - the library supports the ipc:// protocol
@@ -35,7 +35,7 @@ class ZMQ {
         curve - the library supports the CURVE security mechanism
         gssapi - the library supports the GSSAPI security mechanism
     */
-    enum Capability : String {
+    public enum Capability : String {
         case ipc
         case pgm
         case tipc
@@ -45,7 +45,7 @@ class ZMQ {
     }
 
     // void zmq_version (int *major, int *minor, int *patch)
-    static var version : (major: Int, minor: Int, patch: Int) {
+    public static var version : (major: Int, minor: Int, patch: Int) {
         var major: Int32 = 0
         var minor: Int32 = 0
         var patch: Int32 = 0
@@ -54,7 +54,7 @@ class ZMQ {
     }
 
     // int zmq_has (const char *capability)
-    static func has(_ capability : Capability) -> Bool {
+    public static func has(_ capability : Capability) -> Bool {
         return zmq_has(capability.rawValue) == 1
     }
 

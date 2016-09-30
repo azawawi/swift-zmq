@@ -25,7 +25,7 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-class Context {
+public class Context {
     var pointer : UnsafeMutableRawPointer?
 
     init() throws {
