@@ -57,8 +57,8 @@ class ZMQTests: XCTestCase {
 
     func testContext() {
         do {
-            let ctx = try ZMQ.context()
-            XCTAssertTrue(true, "Context creation")
+            let _ = try ZMQ.context()
+            XCTAssertTrue(true, "Context created")
 
         } catch {
             XCTFail("Context creation failure")

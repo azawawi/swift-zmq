@@ -25,7 +25,7 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-struct ZMQ {
+class ZMQ {
 
     /*
         ipc - the library supports the ipc:// protocol
