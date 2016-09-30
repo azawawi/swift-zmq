@@ -7,7 +7,7 @@ import ZMQ
 
 func hwserver() throws {
     // Create a socket to listen and talk to incoming clients
-    let context   = try Context()
+    let context   = try ZMQ.Context()
     let responder = try context.socket(.rep)
     responder.bind(endpoint: "tcp://*:5555")
 
