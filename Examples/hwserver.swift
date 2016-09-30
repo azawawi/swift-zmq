@@ -9,7 +9,7 @@ func hwserver() throws {
     // Create a socket to listen and talk to incoming clients
     let context   = try Context()
     let responder = try context.socket(.rep)
-    responder.bind("tcp://*:5555")
+    responder.bind(endpoint: "tcp://*:5555")
 
     while true {
         let _ = responder.recv()
