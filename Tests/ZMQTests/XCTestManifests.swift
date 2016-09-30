@@ -27,5 +27,6 @@ extension ZMQTests {
     static var allTests = [
         ("testVersion", testVersion),
         ("testHas",     testHas),
+        ("testContext", testContext),
     ]
 }

@@ -44,11 +44,15 @@ extension ZMQ {
     }
 
     func term() throws {
-        if pointer != nil {
-            let result = zmq_ctx_term(pointer)
-            if result == -1 {
-                throw ZMQError.invalidHandle
-            }
+        guard pointer != nil else {
+            return
+        }
+
+        let result = zmq_ctx_term(pointer)
+        if result == -1 {
+            throw ZMQError.invalidHandle
+        } else {
+            pointer = nil
         }
     }
 

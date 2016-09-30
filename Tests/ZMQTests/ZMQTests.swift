@@ -54,4 +54,14 @@ class ZMQTests: XCTestCase {
         let _ = ZMQ.has(.gssapi)
         XCTAssertTrue(true, ".gssapi works")
     }
+
+    func testContext() {
+        do {
+            let ctx = try ZMQ.context()
+            XCTAssertTrue(true, "Context creation")
+
+        } catch {
+            XCTFail("Context creation failure")
+        }
+    }
 }
