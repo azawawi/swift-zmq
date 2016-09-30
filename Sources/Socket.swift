@@ -41,7 +41,7 @@ public class Socket {
     }
 
     deinit {
-      //TODO destroy socket
+        //TODO destroy socket
     }
 
     public func connect(_ endpoint : String) {
@@ -49,10 +49,16 @@ public class Socket {
         //let r = zmq_connect(endpoint)
     }
 
+    public func bind(endpoint: String) {
+        //TODO  call int zmq_bind (void *socket, const char *endpoint);
+    }
+
     public func send(_ string : String) {
+        //TODo send message
     }
 
     public func recv() -> String {
-      return ""
+        //TODO receive message
+        return ""
     }
 }
