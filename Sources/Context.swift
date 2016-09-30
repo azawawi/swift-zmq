@@ -25,9 +25,7 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-extension ZMQ {
-
-  class Context {
+class Context {
     var pointer : UnsafeMutableRawPointer?
 
     init() throws {
@@ -56,9 +54,7 @@ extension ZMQ {
         }
     }
 
-    func socket(_ socketOption : SocketOption) throws -> ZMQ.Socket {
-        return try ZMQ.Socket(context: self, socketOption: socketOption)
+    func socket(_ socketOption : SocketOption) throws -> Socket {
+        return try Socket(context: self, socketOption: socketOption)
     }
-  }
-
 }

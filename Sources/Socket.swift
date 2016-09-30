@@ -25,16 +25,14 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-extension ZMQ {
-
-  enum SocketOption : Int32 {
+enum SocketOption : Int32 {
     case req
-  }
+}
 
-  class Socket {
+class Socket {
     var pointer : UnsafeMutableRawPointer?
 
-    init(context: ZMQ.Context, socketOption : SocketOption) throws {
+    init(context: Context, socketOption : SocketOption) throws {
         // void *zmq_socket (void *context, int type);
         let p :  UnsafeMutableRawPointer? = zmq_socket(context.pointer, socketOption.rawValue)
         guard p != nil else {
@@ -61,5 +59,4 @@ extension ZMQ {
     func recv() -> String {
       return ""
     }
-  }
 }

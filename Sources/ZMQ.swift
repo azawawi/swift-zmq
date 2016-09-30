@@ -58,8 +58,4 @@ class ZMQ {
         return zmq_has(capability.rawValue) == 1
     }
 
-    static func context() throws -> Context {
-        return try Context()
-    }
-
 }

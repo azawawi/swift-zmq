@@ -25,8 +25,6 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-extension ZMQ {
-    enum ZMQError : Error {
-        case invalidHandle
-    }
+enum ZMQError : Error {
+    case invalidHandle
 }
