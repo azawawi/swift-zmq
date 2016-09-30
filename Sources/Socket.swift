@@ -28,7 +28,7 @@ import CZeroMQ
 public class Socket {
     var pointer : UnsafeMutableRawPointer?
 
-    init(context: Context, socketOption : SocketOption) throws {
+    public init(context: Context, socketOption : SocketOption) throws {
         // void *zmq_socket (void *context, int type);
         let p :  UnsafeMutableRawPointer? = zmq_socket(context.pointer, socketOption.rawValue)
         guard p != nil else {
@@ -44,15 +44,15 @@ public class Socket {
       //TODO destroy socket
     }
 
-    func connect(_ endpoint : String) {
+    public func connect(_ endpoint : String) {
         //int zmq_connect (void *socket, const char *endpoint);
         //let r = zmq_connect(endpoint)
     }
 
-    func send(_ string : String) {
+    public func send(_ string : String) {
     }
 
-    func recv() -> String {
+    public func recv() -> String {
       return ""
     }
 }

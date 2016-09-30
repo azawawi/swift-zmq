@@ -28,7 +28,7 @@ import CZeroMQ
 public class Context {
     var pointer : UnsafeMutableRawPointer?
 
-    init() throws {
+    public init() throws {
         let contextHandle = zmq_ctx_new()
         if contextHandle == nil {
             throw ZMQError.invalidHandle
@@ -41,7 +41,7 @@ public class Context {
         try! term()
     }
 
-    func term() throws {
+    public func term() throws {
         guard pointer != nil else {
             return
         }
@@ -54,7 +54,7 @@ public class Context {
         }
     }
 
-    func socket(_ socketOption : SocketOption) throws -> Socket {
+    public func socket(_ socketOption : SocketOption) throws -> Socket {
         return try Socket(context: self, socketOption: socketOption)
     }
 }
