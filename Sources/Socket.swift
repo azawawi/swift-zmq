@@ -90,7 +90,7 @@ extension ZMQ {
             This uses the following C library function:
                 int zmq_send (void *socket, void *buf, size_t len, int flags);
          */
-        public func send(string : String, flags : Int = 0) throws {
+        public func send(string : String, flags : Int32 = 0) throws {
             //TODO flags should be send/recv option or something like that
             let result = zmq_send(handle, string, string.characters.count, flags)
             if result == -1 {
@@ -104,7 +104,7 @@ extension ZMQ {
             This uses the following C library function:
                 int zmq_recv (void *socket, void *buf, size_t len, int flags);
          */
-        public func recv(bufferLength : Int = 256, flags : Int = 0) throws -> String? {
+        public func recv(bufferLength : Int = 256, flags : Int32 = 0) throws -> String? {
             //TODO flags should be send/recv option or something like that
             let bufferPointer = UnsafeMutablePointer<CChar>.allocate(capacity: bufferLength)
             let result = zmq_recv(handle, bufferPointer, bufferLength, flags)
