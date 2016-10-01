@@ -91,17 +91,26 @@ extension ZMQ {
                 int zmq_send (void *socket, void *buf, size_t len, int flags);
          */
         public func send(string : String) throws {
-            /*
-            let result = zmq_send(handle, endpoint)
+            let result = zmq_send(handle, string, string.characters.count, ZMQ_DONTWAIT)
             if result == -1 {
                 throw ZMQError.invalidHandle
             }
-            */
         }
 
-        public func recv() -> String {
-            //TODO receive message
-            return ""
+        /**
+            Receive a message part from the current socket
+
+            This uses the following C library function:
+                int zmq_recv (void *socket, void *buf, size_t len, int flags);
+         */
+        public func recv(bufferLength : Int = 256) throws -> String? {
+            let bufferPointer = UnsafeMutablePointer<CChar>.allocate(capacity: bufferLength)
+            let result = zmq_recv(handle, bufferPointer, bufferLength, ZMQ_DONTWAIT)
+            if result == -1 {
+                throw ZMQError.invalidHandle
+            }
+
+            return String(validatingUTF8: bufferPointer)
         }
     }
 
