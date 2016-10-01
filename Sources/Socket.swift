@@ -28,34 +28,75 @@ import CZeroMQ
 extension ZMQ {
 
     public class Socket {
-        var pointer : UnsafeMutableRawPointer?
+        var handle : UnsafeMutableRawPointer?
 
         public init(context: Context, type : SocketType) throws {
             // Call void *zmq_socket (void *context, int type);
-            let p :  UnsafeMutableRawPointer? = zmq_socket(context.pointer, type.rawValue)
+            let p :  UnsafeMutableRawPointer? = zmq_socket(context.handle, type.rawValue)
             guard p != nil else {
                 throw ZMQError.invalidHandle
             }
 
-            // Now we can assign socket pointer safely
-            pointer = p!
+            // Now we can assign socket handle safely
+            handle = p!
         }
 
         deinit {
-            //TODO destroy socket
+            try! close()
         }
 
-        public func connect(endpoint : String) {
-            //int zmq_connect (void *socket, const char *endpoint);
-            //let r = zmq_connect(endpoint)
+        /**
+            Create an outgoing connection on the current socket
+
+            This uses the following C library function:
+                int zmq_connect (void *socket, const char *endpoint);
+         */
+        public func connect(endpoint : String) throws {
+            let result = zmq_connect(handle, endpoint)
+            if result == -1 {
+                throw ZMQError.invalidHandle
+            }
         }
 
-        public func bind(endpoint: String) {
-            //TODO  call int zmq_bind (void *socket, const char *endpoint);
+        /**
+            Closes the current socket
+
+            This uses the following C library function:
+                int zmq_close (void *socket);
+         */
+        public func close() throws {
+            let result = zmq_close(handle)
+            if result == -1 {
+                throw ZMQError.invalidHandle
+            }
         }
 
-        public func send(string : String) {
-            //TODo send message
+        /**
+            Accept incoming connections on the current socket
+
+            This uses the following C library function:
+                int zmq_bind (void *socket, const char *endpoint);
+         */
+        public func bind(endpoint: String) throws {
+            let result = zmq_bind(handle, endpoint)
+            if result == -1 {
+                throw ZMQError.invalidHandle
+            }
+        }
+
+        /**
+            Send a message part via the current socket
+
+            This uses the following C library function:
+                int zmq_send (void *socket, void *buf, size_t len, int flags);
+         */
+        public func send(string : String) throws {
+            /*
+            let result = zmq_send(handle, endpoint)
+            if result == -1 {
+                throw ZMQError.invalidHandle
+            }
+            */
         }
 
         public func recv() -> String {

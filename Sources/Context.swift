@@ -28,7 +28,7 @@ import CZeroMQ
 extension ZMQ {
 
     public class Context {
-        var pointer : UnsafeMutableRawPointer?
+        var handle : UnsafeMutableRawPointer?
 
         public init() throws {
             let contextHandle = zmq_ctx_new()
@@ -36,7 +36,7 @@ extension ZMQ {
                 throw ZMQError.invalidHandle
             }
 
-            pointer = contextHandle
+            handle = contextHandle
         }
 
         deinit {
@@ -44,15 +44,15 @@ extension ZMQ {
         }
 
         public func term() throws {
-            guard pointer != nil else {
+            guard handle != nil else {
                 return
             }
 
-            let result = zmq_ctx_term(pointer)
+            let result = zmq_ctx_term(handle)
             if result == -1 {
                 throw ZMQError.invalidHandle
             } else {
-                pointer = nil
+                handle = nil
             }
         }
 
