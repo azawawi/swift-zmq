@@ -9,12 +9,12 @@ func hwserver() throws {
     // Create a socket to listen and talk to incoming clients
     let context   = try ZMQ.Context()
     let responder = try context.socket(type: .rep)
-    responder.bind(endpoint: "tcp://*:5555")
+    try responder.bind(endpoint: "tcp://*:5555")
 
     while true {
-        let _ = responder.recv()
+        let _ = try responder.recv()
         print("Received Hello")
         sleep(1)
-        responder.send(string: "World")
+        try responder.send(string: "World")
     }
 }
