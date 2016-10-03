@@ -62,17 +62,33 @@ class ZMQTests: XCTestCase {
 
             // ioThreads property
             XCTAssertTrue( context.ioThreads == 1, "Default value for ioThreads is 1" )
-            let newIoThreadValue = 2
-            context.ioThreads = newIoThreadValue
-            XCTAssertTrue( context.ioThreads == newIoThreadValue,
+            let newIoThread = 2
+            context.ioThreads = newIoThread
+            XCTAssertTrue( context.ioThreads == newIoThread,
                 "ioThreads property setter works" )
 
             // maxSockets and socketLimit property
+            XCTAssertTrue( context.socketLimit > 0, "Default value for socketLimit > 0" )
             XCTAssertTrue( context.maxSockets <= context.socketLimit, "Default value for maxSockets <= socketLimit" )
-            let newMaxSocketsValue = 2
-            context.maxSockets = newMaxSocketsValue
-            XCTAssertTrue( context.maxSockets == newMaxSocketsValue,
+            let newMaxSockets = 2
+            context.maxSockets = newMaxSockets
+            XCTAssertTrue( context.maxSockets == newMaxSockets,
                 "maxSockets property setter works" )
+
+            // ipv6Enabled property
+            XCTAssertTrue( !context.ipv6Enabled, "Default value for ipv6Enabled is false" )
+            let newIpv6Enabled = true
+            context.ipv6Enabled = newIpv6Enabled
+            XCTAssertTrue( context.ipv6Enabled == newIpv6Enabled,
+                "ipv6Enabled property setter works" )
+
+            // setThreadPriority
+            try context.setThreadPriority(10)
+            XCTAssertTrue(true, "Context setThreadPriority works")
+
+            // setThreadSchedulingPolicy
+            try context.setThreadSchedulingPolicy(5)
+            XCTAssertTrue(true, "Context setThreadSchedulingPolicy works")
 
         } catch {
             XCTFail("Context creation failure")
