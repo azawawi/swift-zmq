@@ -27,6 +27,9 @@ let (major, minor, patch) = ZMQ.version
 print("ZeroMQ library version is \(major).\(minor).\(patch)")
 ```
 
+More examples can be found in the
+[examples](https://github.com/azawawi/swift-zmq-examples) github repository.
+
 ## Usage
 
 Your `Package.swift` should be something like the following code to be able to
@@ -56,7 +59,7 @@ $ swift test
 
 ## Author
 
-Ahmad M. Zawawi, https://github.com/azawawi/
+[Ahmad M. Zawawi|https://github.com/azawawi)
 
 ## License
 
