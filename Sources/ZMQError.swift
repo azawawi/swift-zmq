@@ -27,4 +27,11 @@ import CZeroMQ
 
 public enum ZMQError : Error {
     case invalidHandle
+
+    //TODO exprimental... improve this function
+    public func description() -> String? {
+        let description: String? = String(validatingUTF8: zmq_strerror(zmq_errno()))
+        print("Last error says '\(description)'")
+        return description
+    }
 }
