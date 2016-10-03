@@ -63,7 +63,7 @@ $ swift test
 
 ## Author
 
-[Ahmad M. Zawawi|https://github.com/azawawi)
+[Ahmad M. Zawawi](https://github.com/azawawi)
 
 ## License
 
