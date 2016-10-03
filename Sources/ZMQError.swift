@@ -28,7 +28,7 @@ import CZeroMQ
 public struct ZMQError : Error, CustomStringConvertible {
     public let description: String
 
-    public static var last : Error {
+    public static var last : ZMQError {
         let errorCString = zmq_strerror(zmq_errno())!
         let description = String(validatingUTF8: errorCString)!
         return ZMQError(description: description)
