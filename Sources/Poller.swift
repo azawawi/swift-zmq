@@ -25,28 +25,10 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
+//TODO implement Poller
 extension ZMQ {
 
-    public enum SocketType : Int32 {
-        case req
-        case rep
-        case router
-        case dealer
+    public class Poller {
     }
 
-}
-
-extension ZMQ.SocketType {
-    public var rawValue: Int32 {
-        switch self {
-            case .req:
-                return ZMQ_REQ
-            case .rep:
-                return ZMQ_REP
-            case .router:
-                return ZMQ_ROUTER
-            case .dealer:
-                return ZMQ_DEALER
-        }
-    }
 }
