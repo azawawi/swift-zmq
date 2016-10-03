@@ -1,10 +1,10 @@
-# ZMQ
+# ZMQ - ZeroMQ Swift bindings
 
 [![Swift][swift-badge]][swift-url]
 [![Platform][platform-badge]][platform-url]
 [![License][mit-badge]][mit-url]
 
-This package provides [Swift](http://swift.org) 3 API bindings for the famous
+This package provides [Swift](http://swift.org) API bindings for the famous
 [ZeroMQ](http://zeromq.org) library.
 
 **Note: At the moment, please consider the project experimental.**
