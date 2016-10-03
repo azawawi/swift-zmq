@@ -25,13 +25,12 @@ SOFTWARE.
 // For now
 import CZeroMQ
 
-public enum ZMQError : Error {
-    case invalidHandle
+public struct ZMQError : Error, CustomStringConvertible {
+    public let description: String
 
-    //TODO exprimental... improve this function
-    public func description() -> String? {
-        let description: String? = String(validatingUTF8: zmq_strerror(zmq_errno()))
-        print("Last error says '\(description)'")
-        return description
+    public static var last : Error {
+        let errorCString = zmq_strerror(zmq_errno())!
+        let description = String(validatingUTF8: errorCString)!
+        return ZMQError(description: description)
     }
 }

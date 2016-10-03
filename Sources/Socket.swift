@@ -34,7 +34,7 @@ extension ZMQ {
             // Call void *zmq_socket (void *context, int type);
             let p :  UnsafeMutableRawPointer? = zmq_socket(context.handle, type.rawValue)
             guard p != nil else {
-                throw ZMQError.invalidHandle
+                throw ZMQError.last
             }
 
             // Now we can assign socket handle safely
@@ -54,7 +54,7 @@ extension ZMQ {
         public func connect(endpoint : String) throws {
             let result = zmq_connect(handle, endpoint)
             if result == -1 {
-                throw ZMQError.invalidHandle
+                throw ZMQError.last
             }
         }
 
@@ -67,7 +67,7 @@ extension ZMQ {
         public func close() throws {
             let result = zmq_close(handle)
             if result == -1 {
-                throw ZMQError.invalidHandle
+                throw ZMQError.last
             }
         }
 
@@ -80,7 +80,7 @@ extension ZMQ {
         public func bind(endpoint: String) throws {
             let result = zmq_bind(handle, endpoint)
             if result == -1 {
-                throw ZMQError.invalidHandle
+                throw ZMQError.last
             }
         }
 
@@ -94,7 +94,7 @@ extension ZMQ {
             //TODO flags should be send/recv option or something like that
             let result = zmq_send(handle, string, string.characters.count, flags)
             if result == -1 {
-                throw ZMQError.invalidHandle
+                throw ZMQError.last
             }
         }
 
@@ -109,7 +109,7 @@ extension ZMQ {
             let bufferPointer = UnsafeMutablePointer<CChar>.allocate(capacity: bufferLength)
             let result = zmq_recv(handle, bufferPointer, bufferLength, flags)
             if result == -1 {
-                throw ZMQError.invalidHandle
+                throw ZMQError.last
             }
 
             return String(validatingUTF8: bufferPointer)

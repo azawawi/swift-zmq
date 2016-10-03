@@ -33,7 +33,7 @@ extension ZMQ {
         public init() throws {
             let contextHandle = zmq_ctx_new()
             if contextHandle == nil {
-                throw ZMQError.invalidHandle
+                throw ZMQError.last
             }
 
             handle = contextHandle
@@ -50,7 +50,7 @@ extension ZMQ {
 
             let result = zmq_ctx_term(handle)
             if result == -1 {
-                throw ZMQError.invalidHandle
+                throw ZMQError.last
             } else {
                 handle = nil
             }
@@ -69,7 +69,7 @@ extension ZMQ {
         private func getOption(_ name : Int32) throws -> Int32 {
             let result = zmq_ctx_get(handle, name)
             if result == -1 {
-                throw ZMQError.invalidHandle
+                throw ZMQError.last
             }
 
             return result
@@ -84,7 +84,7 @@ extension ZMQ {
         private func setOption(_ name: Int32, _ value: Int32) throws {
             let result = zmq_ctx_set(handle, name, value)
             if result == -1 {
-                throw ZMQError.invalidHandle
+                throw ZMQError.last
             }
         }
 
