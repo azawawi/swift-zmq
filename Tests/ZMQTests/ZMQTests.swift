@@ -76,7 +76,8 @@ class ZMQTests: XCTestCase {
                 "maxSockets property setter works" )
 
             // ipv6Enabled property
-            XCTAssertTrue( !context.ipv6Enabled, "Default value for ipv6Enabled is false" )
+            XCTAssertFalse( context.ipv6Enabled,
+                "Default value for ipv6Enabled is false" )
             let newIpv6Enabled = true
             context.ipv6Enabled = newIpv6Enabled
             XCTAssertTrue( context.ipv6Enabled == newIpv6Enabled,

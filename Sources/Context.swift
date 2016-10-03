@@ -143,7 +143,7 @@ extension ZMQ {
          */
         public var ipv6Enabled : Bool {
             get {
-                return try! getOption(ZMQ_SOCKET_LIMIT) == 1
+                return try! getOption(ZMQ_IPV6) == 1
             }
             set {
                 try! setOption(ZMQ_IPV6, newValue ? 1 : 0)
