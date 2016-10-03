@@ -57,8 +57,22 @@ class ZMQTests: XCTestCase {
 
     func testContext() {
         do {
-            let _ = try ZMQ.Context()
+            let context = try ZMQ.Context()
             XCTAssertTrue(true, "Context created")
+
+            // ioThreads property
+            XCTAssertTrue( context.ioThreads == 1, "Default value for ioThreads is 1" )
+            let newIoThreadValue = 2
+            context.ioThreads = newIoThreadValue
+            XCTAssertTrue( context.ioThreads == newIoThreadValue,
+                "ioThreads property setter works" )
+
+            // maxSockets and socketLimit property
+            XCTAssertTrue( context.maxSockets <= context.socketLimit, "Default value for maxSockets <= socketLimit" )
+            let newMaxSocketsValue = 2
+            context.maxSockets = newMaxSocketsValue
+            XCTAssertTrue( context.maxSockets == newMaxSocketsValue,
+                "maxSockets property setter works" )
 
         } catch {
             XCTFail("Context creation failure")
