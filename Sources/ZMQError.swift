@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 // For now
-import CZeroMQ
+import LibZMQ
 
 public struct ZMQError : Error, CustomStringConvertible {
     public let description: String

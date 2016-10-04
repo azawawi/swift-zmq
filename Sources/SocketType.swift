@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 // For now
-import CZeroMQ
+import LibZMQ
 
 extension ZMQ {
 
