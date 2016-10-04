@@ -25,9 +25,16 @@ SOFTWARE.
 // For now
 import LibZMQ
 
+/*
+    This provides a clean way to get the ZMQ library errors. This is usually
+    thrown when a -1 result is returned from a LibZMQ library function
+ */
 public struct ZMQError : Error, CustomStringConvertible {
     public let description: String
 
+    /*
+        Returns the last ZMQ library error with a string error description
+     */
     public static var last : ZMQError {
         let errorCString = zmq_strerror(zmq_errno())!
         let description = String(validatingUTF8: errorCString)!
