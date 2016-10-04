@@ -40,7 +40,20 @@ extension ZMQ {
         }
 
         deinit {
-            try! term()
+            try! destroy()
+        }
+
+        public func destroy() throws {
+            guard handle != nil else {
+                return
+            }
+
+            let result = zmq_ctx_destroy(handle)
+            if result == -1 {
+                throw ZMQError.last
+            } else {
+                handle = nil
+            }
         }
 
         public func term() throws {
