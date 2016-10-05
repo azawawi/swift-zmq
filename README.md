@@ -43,7 +43,7 @@ use this package:
 import PackageDescription
 
 let package = Package(
-    name: "YourModuleName",
+    name: "YourPackageName",
     dependencies: [
         .Package(
             url          : "https://github.com/azawawi/swift-zmq.git",
