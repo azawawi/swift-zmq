@@ -40,15 +40,18 @@ extension ZMQ {
         }
 
         deinit {
-            try! destroy()
+            try! terminate()
         }
 
-        public func destroy() throws {
+        /*
+            Shutdown the current context without terminating the current context
+         */
+        public func shutdown() throws {
             guard handle != nil else {
                 return
             }
 
-            let result = zmq_ctx_destroy(handle)
+            let result = zmq_ctx_shutdown(handle)
             if result == -1 {
                 throw ZMQError.last
             } else {
@@ -56,7 +59,11 @@ extension ZMQ {
             }
         }
 
-        public func term() throws {
+        /*
+            Terminate the current context and block until all open sockets
+            are closed or their linger period has expired
+         */
+        public func terminate() throws {
             guard handle != nil else {
                 return
             }
