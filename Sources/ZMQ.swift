@@ -44,7 +44,9 @@ public struct ZMQ {
         case gssapi
     }
 
-    // void zmq_version (int *major, int *minor, int *patch)
+    /*
+        Returns the version tuple as (.major, .minor, .patch)
+    */
     public static var version : (major: Int, minor: Int, patch: Int) {
         var major: Int32 = 0
         var minor: Int32 = 0
@@ -53,7 +55,17 @@ public struct ZMQ {
         return ( Int(major), Int(minor), Int(patch) )
     }
 
-    // int zmq_has (const char *capability)
+    /*
+        Returns the version string (e.g. "4.1.0")
+     */
+    public static var versionString : String {
+        let version = self.version
+        return "\(version.major).\(version.minor).\(version.patch)"
+    }
+
+    /*
+        Returns whether the capability is enabled or not
+    */
     public static func has(_ capability : Capability) -> Bool {
         return zmq_has(capability.rawValue) == 1
     }
