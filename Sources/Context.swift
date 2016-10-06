@@ -69,7 +69,7 @@ extension ZMQ {
             }
         }
 
-        public func socket(type : ZMQ.SocketType) throws -> Socket {
+        public func socket(_ type : ZMQ.SocketType) throws -> Socket {
             return try Socket(context: self, type: type)
         }
 

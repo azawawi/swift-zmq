@@ -51,7 +51,7 @@ extension ZMQ {
             This uses the following C library function:
                 int zmq_connect (void *socket, const char *endpoint);
          */
-        public func connect(endpoint : String) throws {
+        public func connect(_ endpoint : String) throws {
             let result = zmq_connect(handle, endpoint)
             if result == -1 {
                 throw ZMQError.last
@@ -77,7 +77,7 @@ extension ZMQ {
             This uses the following C library function:
                 int zmq_bind (void *socket, const char *endpoint);
          */
-        public func bind(endpoint: String) throws {
+        public func bind(_ endpoint: String) throws {
             let result = zmq_bind(handle, endpoint)
             if result == -1 {
                 throw ZMQError.last
