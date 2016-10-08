@@ -29,16 +29,16 @@ extension ZMQ {
 
     public enum SocketType : Int32 {
         // Request-reply pattern
-        case req
-        case rep
+        case request
+        case reply
         case router
         case dealer
 
         // Publish-subscribe pattern
-        case pub
-        case sub
-        case xpub
-        case xsub
+        case publish
+        case subscribe
+        case xpublish
+        case xsubscribe
 
         // Pipeline pattern
         case push
@@ -57,16 +57,16 @@ extension ZMQ.SocketType {
     public var rawValue: Int32 {
         switch self {
             // Request-reply pattern
-            case .req:    return ZMQ_REQ
-            case .rep:    return ZMQ_REP
-            case .router: return ZMQ_ROUTER
-            case .dealer: return ZMQ_DEALER
+            case .request:  return ZMQ_REQ
+            case .reply:    return ZMQ_REP
+            case .router:   return ZMQ_ROUTER
+            case .dealer:   return ZMQ_DEALER
 
             // Publish-subscribe pattern
-            case .pub:    return ZMQ_PUB
-            case .sub:    return ZMQ_SUB
-            case .xpub:   return ZMQ_XPUB
-            case .xsub:   return ZMQ_XSUB
+            case .publish:    return ZMQ_PUB
+            case .subscribe:  return ZMQ_SUB
+            case .xpublish:   return ZMQ_XPUB
+            case .xsubscribe: return ZMQ_XSUB
 
             // Pipeline pattern
             case .push:   return ZMQ_PUSH
