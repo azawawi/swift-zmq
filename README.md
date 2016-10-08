@@ -66,6 +66,20 @@ To run tests, please type:
 $ swift test
 ```
 
+## Troubleshooting
+
+- You may get the following error after a `swift build`:
+```
+error: The dependency graph could not be satisfied because an update to...
+```
+
+    To resolve it, please run:
+
+    ```
+swift build --clean dist
+swift build
+```
+
 ## See Also
 
 - [Zewo's ZeroMQ swift bindings](https://github.com/ZewoGraveyard/ZeroMQ)
