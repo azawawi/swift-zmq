@@ -69,7 +69,8 @@ $ swift test
 ## Troubleshooting
 
 - You may get the following error after a `swift build`:
-```
+
+    ```
 error: The dependency graph could not be satisfied because an update to...
 ```
 
