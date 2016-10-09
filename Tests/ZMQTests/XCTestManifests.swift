@@ -28,5 +28,6 @@ extension ZMQTests {
         ("testVersion", testVersion),
         ("testHas",     testHas),
         ("testContext", testContext),
+        ("testSocket",  testSocket),
     ]
 }

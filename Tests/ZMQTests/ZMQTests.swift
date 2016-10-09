@@ -95,7 +95,24 @@ class ZMQTests: XCTestCase {
             XCTAssertTrue(true, "Context setThreadSchedulingPolicy works")
 
         } catch {
-            XCTFail("Context creation failure")
+            XCTFail("Context tests failure")
+        }
+    }
+
+    func testSocket() {
+        do {
+            // Request socket
+            let requestContext = try ZMQ.Context()
+            let _ = try requestContext.socket(.request)
+            XCTAssertTrue(true, ".request socket created")
+
+            // Reply socket
+            let replyContext = try ZMQ.Context()
+            let _ = try replyContext.socket(.request)
+            XCTAssertTrue(true, ".reply socket created")
+
+        } catch {
+            XCTFail("Socket tests failure")
         }
     }
 }
