@@ -42,7 +42,11 @@ extension ZMQ {
         }
 
         deinit {
-            try! close()
+            do {
+                try close()
+            } catch {
+                print(error)
+            }
         }
 
         /**

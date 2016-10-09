@@ -63,27 +63,28 @@ class ZMQTests: XCTestCase {
             XCTAssertTrue(true, "Context created")
 
             // ioThreads property
-            XCTAssertTrue( context.ioThreads == 1, "Default value for ioThreads is 1" )
+            XCTAssertTrue( try context.getIOThreads() == 1, "Default value for ioThreads is 1" )
             let newIoThread = 2
-            context.ioThreads = newIoThread
-            XCTAssertTrue( context.ioThreads == newIoThread,
+            try context.setIOThreads(newIoThread)
+            XCTAssertTrue( try context.getIOThreads() == newIoThread,
                 "ioThreads property setter works" )
 
             // maxSockets and socketLimit property
-            XCTAssertTrue( context.socketLimit > 0, "Default value for socketLimit > 0" )
-            XCTAssertTrue( context.maxSockets <= context.socketLimit, "Default value for maxSockets <= socketLimit" )
+            let socketLimit = try context.getSocketLimit()
+            XCTAssertTrue( socketLimit > 0, "Default value for socketLimit > 0" )
+            XCTAssertTrue( try context.getMaxSockets() <= socketLimit, "Default value for maxSockets <= socketLimit" )
             let newMaxSockets = 2
-            context.maxSockets = newMaxSockets
-            XCTAssertTrue( context.maxSockets == newMaxSockets,
+            try context.setMaxSockets(newMaxSockets)
+            XCTAssertTrue( try context.getMaxSockets() == newMaxSockets,
                 "maxSockets property setter works" )
 
             // ipv6Enabled property
-            XCTAssertFalse( context.ipv6Enabled,
-                "Default value for ipv6Enabled is false" )
+            XCTAssertFalse( try context.isIPV6Enabled(),
+                "Default value for IPV6Enabled is false" )
             let newIpv6Enabled = true
-            context.ipv6Enabled = newIpv6Enabled
-            XCTAssertTrue( context.ipv6Enabled == newIpv6Enabled,
-                "ipv6Enabled property setter works" )
+            try context.setIPV6Enabled(newIpv6Enabled)
+            XCTAssertTrue( try context.isIPV6Enabled() == newIpv6Enabled,
+                "IPV6Enabled property setter works" )
 
             // setThreadPriority
             try context.setThreadPriority(10)

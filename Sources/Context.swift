@@ -40,7 +40,11 @@ extension ZMQ {
         }
 
         deinit {
-            try! terminate()
+            do {
+                try terminate()
+            } catch {
+                print(error)
+            }
         }
 
         /*
@@ -109,18 +113,21 @@ extension ZMQ {
         }
 
         /*
-            The number of I/O threads for the current context
+            Returns the number of I/O threads for the current context
 
             Default value is 1 (read and write)
          */
-        public var ioThreads : Int {
-            get {
-                return try! Int(getOption(ZMQ_IO_THREADS))
-            }
+        public func getIOThreads() throws -> Int {
+            return try Int(getOption(ZMQ_IO_THREADS))
+        }
 
-            set {
-                try! setOption(ZMQ_IO_THREADS, Int32(newValue))
-            }
+        /*
+            Sets the number of I/O threads for the current context
+
+            Default value is 1 (read and write)
+         */
+        public func setIOThreads(_ value : Int = 1) throws {
+            try setOption(ZMQ_IO_THREADS, Int32(value))
         }
 
         /*
@@ -138,36 +145,45 @@ extension ZMQ {
             Default value is -1 (write only)
          */
         public func setThreadPriority(_ value : Int = -1) throws {
-            try! setOption(ZMQ_THREAD_PRIORITY, Int32(value))
+            try setOption(ZMQ_THREAD_PRIORITY, Int32(value))
         }
 
         /*
-            The maximum number of sockets associated with the current context
+            Returns the maximum number of sockets associated with the current
+            context
 
             Default value is 1024 (read/write)
          */
-        public var maxSockets: Int {
-            get {
-                return try! Int(getOption(ZMQ_MAX_SOCKETS))
-            }
-            set {
-                try! setOption(ZMQ_MAX_SOCKETS, Int32(newValue))
-            }
+        public func getMaxSockets() throws -> Int {
+            return try Int(getOption(ZMQ_MAX_SOCKETS))
         }
 
         /*
-            Boolean flag to determine whether the IPV6 is enabled or not for the
-            current context
+            Sets the maximum number of sockets associated with the current
+            context
+
+            Default value is 1024 (read/write)
+         */
+        public func setMaxSockets(_ value : Int = 1024) throws {
+            try setOption(ZMQ_MAX_SOCKETS, Int32(value))
+        }
+
+        /*
+            Returns whether the IPV6 is enabled or not for the current context
 
             Default value is false (read/write)
          */
-        public var ipv6Enabled : Bool {
-            get {
-                return try! getOption(ZMQ_IPV6) == 1
-            }
-            set {
-                try! setOption(ZMQ_IPV6, newValue ? 1 : 0)
-            }
+        public func isIPV6Enabled() throws -> Bool {
+            return try getOption(ZMQ_IPV6) == 1
+        }
+
+        /*
+            Sets whether the IPV6 is enabled or not for the current context
+
+            Default value is false (read/write)
+         */
+        public func setIPV6Enabled(_ enabled : Bool = false) throws {
+            try setOption(ZMQ_IPV6, enabled ? 1 : 0)
         }
 
         /*
@@ -175,10 +191,8 @@ extension ZMQ {
 
             Default value: (read only)
          */
-        public var socketLimit : Int {
-            get {
-                return try! Int(getOption(ZMQ_SOCKET_LIMIT))
-            }
+        public func getSocketLimit() throws -> Int {
+            return try Int(getOption(ZMQ_SOCKET_LIMIT))
         }
 
     }
