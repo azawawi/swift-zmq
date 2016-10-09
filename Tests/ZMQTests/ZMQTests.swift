@@ -101,15 +101,15 @@ class ZMQTests: XCTestCase {
 
     func testSocket() {
         do {
-            // Request socket
-            let requestContext = try ZMQ.Context()
-            let _ = try requestContext.socket(.request)
-            XCTAssertTrue(true, ".request socket created")
-
-            // Reply socket
-            let replyContext = try ZMQ.Context()
-            let _ = try replyContext.socket(.request)
-            XCTAssertTrue(true, ".reply socket created")
+            // Test all socket types
+            let socketTypes : [ZMQ.SocketType] = [.request, .reply, .router,
+                .dealer, .publish, .subscribe, .xpublish, .xsubscribe, .push,
+                .pull, .pair, .stream]
+            for socketType in socketTypes {
+                let context = try ZMQ.Context()
+                let _ = try context.socket(socketType)
+                XCTAssertTrue(true, "\(socketType) socket created")
+            }
 
         } catch {
             XCTFail("Socket tests failure")
