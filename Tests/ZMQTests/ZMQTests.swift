@@ -62,29 +62,29 @@ class ZMQTests: XCTestCase {
             let context = try ZMQ.Context()
             XCTAssertTrue(true, "Context created")
 
-            // ioThreads property
+            // ioThreads
             XCTAssertTrue( try context.getIOThreads() == 1, "Default value for ioThreads is 1" )
             let newIoThread = 2
             try context.setIOThreads(newIoThread)
             XCTAssertTrue( try context.getIOThreads() == newIoThread,
-                "ioThreads property setter works" )
+                "ioThreads setter works" )
 
-            // maxSockets and socketLimit property
+            // maxSockets and socketLimit
             let socketLimit = try context.getSocketLimit()
             XCTAssertTrue( socketLimit > 0, "Default value for socketLimit > 0" )
             XCTAssertTrue( try context.getMaxSockets() <= socketLimit, "Default value for maxSockets <= socketLimit" )
             let newMaxSockets = 2
             try context.setMaxSockets(newMaxSockets)
             XCTAssertTrue( try context.getMaxSockets() == newMaxSockets,
-                "maxSockets property setter works" )
+                "maxSockets setter works" )
 
-            // ipv6Enabled property
+            // ipv6Enabled
             XCTAssertFalse( try context.isIPV6Enabled(),
                 "Default value for IPV6Enabled is false" )
             let newIpv6Enabled = true
             try context.setIPV6Enabled(newIpv6Enabled)
             XCTAssertTrue( try context.isIPV6Enabled() == newIpv6Enabled,
-                "IPV6Enabled property setter works" )
+                "IPV6Enabled setter works" )
 
             // setThreadPriority
             try context.setThreadPriority(10)
