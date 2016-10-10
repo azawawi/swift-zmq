@@ -77,6 +77,11 @@ public struct ZMQ {
         only; the proxy is fully symmetric and there is no technical difference
         between frontend and backend.
 
+        If the capture socket is not nil, the proxy shall send all messages,
+        received on both frontend and backend, to the capture socket. The
+        capture socket should be a .publish, .dealer, .push, or .pair typed
+        socket.
+
         This uses the C library function:
             int zmq_proxy(const void *frontend, const void *backend, const void
             *capture);
