@@ -57,7 +57,7 @@ public struct ZMQ {
 
     /*
         Returns the version string (e.g. "4.1.0")
-     */
+    */
     public static var versionString : String {
         let version = self.version
         return "\(version.major).\(version.minor).\(version.patch)"
@@ -68,6 +68,28 @@ public struct ZMQ {
     */
     public static func has(_ capability : Capability) -> Bool {
         return zmq_has(capability.rawValue) == 1
+    }
+
+    /*
+        The proxy connects a frontend socket to a backend socket. Conceptually,
+        data flows from frontend to backend. Depending on the socket types,
+        replies may flow in the opposite direction. The direction is conceptual
+        only; the proxy is fully symmetric and there is no technical difference
+        between frontend and backend.
+
+        This uses the C library function:
+            int zmq_proxy(const void *frontend, const void *backend, const void
+            *capture);
+    */
+    public static func proxy(
+        frontend : ZMQ.Socket,
+        backend  : ZMQ.Socket,
+        capture  : ZMQ.Socket? = nil) throws
+    {
+        let result = zmq_proxy(frontend.handle, backend.handle, capture?.handle)
+        if result == -1 {
+            throw ZMQError.last
+        }
     }
 
 }
