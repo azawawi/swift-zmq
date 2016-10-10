@@ -89,6 +89,19 @@ extension ZMQ {
         }
 
         /**
+            Stop accepting connections on the current socket
+
+            This uses the following C library function:
+                int zmq_unbind (void *socket, const char *endpoint);
+         */
+        public func unbind(_ endpoint: String) throws {
+            let result = zmq_unbind(handle, endpoint)
+            if result == -1 {
+                throw ZMQError.last
+            }
+        }
+
+        /**
             Send a message part via the current socket
 
             This uses the following C library function:
