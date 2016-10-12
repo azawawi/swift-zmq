@@ -49,34 +49,33 @@ extension ZMQ {
 
         // Native pattern
         case stream
-    }
 
-}
+        // This is a workaround to return dynamically loaded ZMQ_ constants
+        public var rawValue: Int32 {
+            switch self {
+                // Request-reply pattern
+                case .request:  return ZMQ_REQ
+                case .reply:    return ZMQ_REP
+                case .router:   return ZMQ_ROUTER
+                case .dealer:   return ZMQ_DEALER
 
-extension ZMQ.SocketType {
-    public var rawValue: Int32 {
-        switch self {
-            // Request-reply pattern
-            case .request:  return ZMQ_REQ
-            case .reply:    return ZMQ_REP
-            case .router:   return ZMQ_ROUTER
-            case .dealer:   return ZMQ_DEALER
+                // Publish-subscribe pattern
+                case .publish:    return ZMQ_PUB
+                case .subscribe:  return ZMQ_SUB
+                case .xpublish:   return ZMQ_XPUB
+                case .xsubscribe: return ZMQ_XSUB
 
-            // Publish-subscribe pattern
-            case .publish:    return ZMQ_PUB
-            case .subscribe:  return ZMQ_SUB
-            case .xpublish:   return ZMQ_XPUB
-            case .xsubscribe: return ZMQ_XSUB
+                // Pipeline pattern
+                case .push:   return ZMQ_PUSH
+                case .pull:   return ZMQ_PULL
 
-            // Pipeline pattern
-            case .push:   return ZMQ_PUSH
-            case .pull:   return ZMQ_PULL
+                // Exclusive pair pattern
+                case .pair:   return ZMQ_PAIR
 
-            // Exclusive pair pattern
-            case .pair:   return ZMQ_PAIR
-
-            // Native pattern
-            case .stream: return ZMQ_STREAM
+                // Native pattern
+                case .stream: return ZMQ_STREAM
+            }
         }
     }
+
 }
