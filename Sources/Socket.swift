@@ -51,9 +51,6 @@ extension ZMQ {
 
         /**
             Create an outgoing connection on the current socket
-
-            This uses the following C library function:
-                int zmq_connect (void *socket, const char *endpoint);
          */
         public func connect(_ endpoint : String) throws {
             let result = zmq_connect(handle, endpoint)
@@ -64,9 +61,6 @@ extension ZMQ {
 
         /**
             Closes the current socket
-
-            This uses the following C library function:
-                int zmq_close (void *socket);
          */
         public func close() throws {
             let result = zmq_close(handle)
@@ -77,9 +71,6 @@ extension ZMQ {
 
         /**
             Accept incoming connections on the current socket
-
-            This uses the following C library function:
-                int zmq_bind (void *socket, const char *endpoint);
          */
         public func bind(_ endpoint: String) throws {
             let result = zmq_bind(handle, endpoint)
@@ -90,9 +81,6 @@ extension ZMQ {
 
         /**
             Stop accepting connections on the current socket
-
-            This uses the following C library function:
-                int zmq_unbind (void *socket, const char *endpoint);
          */
         public func unbind(_ endpoint: String) throws {
             let result = zmq_unbind(handle, endpoint)
@@ -103,9 +91,6 @@ extension ZMQ {
 
         /**
             Send a message part via the current socket
-
-            This uses the following C library function:
-                int zmq_send (void *socket, void *buf, size_t len, int flags);
          */
         public func send(string : String, flags : Int32 = 0) throws {
             //TODO flags should be send/recv option or something like that
@@ -117,9 +102,6 @@ extension ZMQ {
 
         /**
             Receive a message part from the current socket
-
-            This uses the following C library function:
-                int zmq_recv (void *socket, void *buf, size_t len, int flags);
          */
         public func recv(bufferLength : Int = 256, flags : Int32 = 0) throws -> String? {
             //TODO flags should be send/recv option or something like that

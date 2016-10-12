@@ -80,15 +80,15 @@ extension ZMQ {
             }
         }
 
+        /*
+            Returns a ZMQ socket with the type provided
+         */
         public func socket(_ type : ZMQ.SocketType) throws -> Socket {
             return try Socket(context: self, type: type)
         }
 
         /*
-            private generic function to get context value
-
-            Uses the following C library function:
-                int zmq_ctx_get (void *context, int option_name);
+            Returns the current context option value (private)
          */
         private func getOption(_ name : Int32) throws -> Int32 {
             let result = zmq_ctx_get(handle, name)
@@ -100,10 +100,7 @@ extension ZMQ {
         }
 
         /*
-            private generic function to set option value for the current context
-
-            Uses the following C library function:
-                int zmq_ctx_set (void *context, int option_name, int option_value);
+            Sets the current context option value (private)
          */
         private func setOption(_ name: Int32, _ value: Int32) throws {
             let result = zmq_ctx_set(handle, name, value)
