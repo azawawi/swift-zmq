@@ -61,6 +61,7 @@ class ZMQTests: XCTestCase {
         do {
             let context = try ZMQ.Context()
             XCTAssertTrue(true, "Context created")
+            XCTAssertTrue(context.handle != nil, "socket.handle is not nil")
 
             // ioThreads
             XCTAssertTrue( try context.getIOThreads() == 1, "Default value for ioThreads is 1" )
@@ -107,7 +108,8 @@ class ZMQTests: XCTestCase {
                 .pull, .pair, .stream]
             for socketType in socketTypes {
                 let context = try ZMQ.Context()
-                let _ = try context.socket(socketType)
+                let socket = try context.socket(socketType)
+                XCTAssertTrue(socket.handle != nil, "socket.handle is not nil")
                 XCTAssertTrue(true, "\(socketType) socket created")
             }
 

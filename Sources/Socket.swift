@@ -28,7 +28,7 @@ import LibZMQ
 extension ZMQ {
 
     public class Socket {
-        var handle : UnsafeMutableRawPointer?
+        public var handle : UnsafeMutableRawPointer?
 
         public init(context: Context, type : SocketType) throws {
             // Call void *zmq_socket (void *context, int type);

@@ -28,7 +28,7 @@ import LibZMQ
 extension ZMQ {
 
     public class Context {
-        var handle : UnsafeMutableRawPointer?
+        public var handle : UnsafeMutableRawPointer?
 
         public init() throws {
             let contextHandle = zmq_ctx_new()
