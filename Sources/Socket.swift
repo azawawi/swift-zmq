@@ -75,9 +75,12 @@ extension ZMQ {
         /**
             Send a message part via the current socket
          */
-        public func send(string : String, flags : Int32 = 0) throws {
-            //TODO flags should be send/recv option or something like that
-            let result = zmq_send(handle, string, string.characters.count, flags)
+        public func send(
+            string  : String,
+            options : SocketSendRecvOption = .none) throws
+        {
+            let result = zmq_send(handle, string, string.characters.count,
+                options.rawValue)
             if result == -1 {
                 throw ZMQError.last
             }
@@ -88,11 +91,18 @@ extension ZMQ {
          */
         public func recv(
             bufferLength : Int = 256,
-            flags        : Int32 = 0
+            options      : SocketSendRecvOption = .none
         ) throws -> String? {
+            // Validate allowed options
+            guard options.isValidRecvOption() else {
+                throw ZMQError.invalidOption
+            }
+
             // Read n bytes from socket into buffer
-            let buffer = UnsafeMutablePointer<CChar>.allocate(capacity: bufferLength)
-            let bufferSize = zmq_recv(handle, buffer, bufferLength, flags)
+            let buffer = UnsafeMutablePointer<CChar>.allocate(
+                capacity: bufferLength)
+            let bufferSize = zmq_recv(handle, buffer, bufferLength,
+                options.rawValue)
             if bufferSize == -1 {
                 throw ZMQError.last
             }

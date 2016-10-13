@@ -22,4 +22,9 @@ public struct ZMQError : Error, CustomStringConvertible {
         let description = String(validatingUTF8: errorCString)!
         return ZMQError(description: description)
     }
+
+    public static var invalidOption : ZMQError {
+        return ZMQError(description: "Invalid option")
+    }
+
 }
