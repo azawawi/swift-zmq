@@ -23,6 +23,7 @@ SOFTWARE.
 */
 
 // For now
+import Foundation
 import LibZMQ
 
 extension ZMQ {
@@ -103,16 +104,24 @@ extension ZMQ {
         /**
             Receive a message part from the current socket
          */
-        public func recv(bufferLength : Int = 256, flags : Int32 = 0) throws -> String? {
-            //TODO flags should be send/recv option or something like that
-            let bufferPointer = UnsafeMutablePointer<CChar>.allocate(capacity: bufferLength)
-            let result = zmq_recv(handle, bufferPointer, bufferLength, flags)
-            if result == -1 {
+        public func recv(
+            bufferLength : Int = 256,
+            flags        : Int32 = 0
+        ) throws -> String? {
+            // Read n bytes from socket into buffer
+            let buffer = UnsafeMutablePointer<CChar>.allocate(capacity: bufferLength)
+            let bufferSize = zmq_recv(handle, buffer, bufferLength, flags)
+            if bufferSize == -1 {
                 throw ZMQError.last
             }
 
-            return String(validatingUTF8: bufferPointer)
+            // Limit string buffer to actual buffer size
+            let data = Data(bytes: buffer, count: Int(bufferSize))
+
+            // Return read UTF8 string
+            return String(data: data, encoding: String.Encoding.utf8)
         }
+
     }
 
 }
